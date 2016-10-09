@@ -1,5 +1,10 @@
 <link rel="import" href="/bower_components/paper-styles/shadow.html">
 <link rel="import" href="/bower_components/paper-styles/typography.html">
+<link rel="import" href="/bower_components/paper-icon-buttons/paper-icon-button.html">
+<link rel="import" href="/bower_components/paper-badge/paper-badge.html">
+<link rel="import" href="/bower_components/iron-icons/iron-icons.html">
+
+
 <dom-module id="blacktip-tank">
   <template>
     <style>
@@ -36,7 +41,7 @@
       }
 
       .placeholder:after {
-        content: 'Tap to edit';
+        content: 'Tap to edit this field';
         opacity: 0.5;
       }
 
@@ -50,16 +55,64 @@
         line-height: 0;
         pointer-events: none;
       }
+
+      .container {
+        display: inline-block;
+        margin-left: 30px;
+        margin-right: 30px;
+      }
+
+      .container > paper-badge {
+       --paper-badge-margin-left: -15px;
+       --paper-badge-width: 30px;
+       --paper-badge-margin-bottom: -10px;
+       --paper-badge-background: var(--paper-indigo-500);
+
+      }
     </style>
+    <!--<div class="tank-key" hidden></div>
+    <div class="card-last-updated" hidden></div>
+    <div class="temperature">
+            <span class="value"></span><span class="scale">°F</span>
+    </div>-->
     <h1
         id="title"
         class$="[[emptyClass(title, editable)]]"
         contenteditable$="[[editable]]"></h1>
-    <p
+    <span
         id="body"
         class$="[[emptyClass(body, editable)]]"
-        contenteditable$="[[editable]]"></p>
-    <!-- <p class="empty" hidden$="[[!propertiesAreEmpty(title, body, editable)]]">Tap to edit this note...</p> -->
+        contenteditable$="[[editable]]"></span><br>
+
+    
+    <span>Target Temp = </span><span id="temperature"
+        class$="[[emptyClass(temperature, editable)]]"
+        contenteditable$="[[editable]]"></span><br><br><br>
+    <div class="container">
+    <paper-icon-button id="temp" src="/images/tempDrk.png" alt="temperature">
+        </paper-icon-button>
+          <paper-badge for="temp" label$="[[temperature]]">
+        </paper-badge>
+
+    <paper-icon-button id="ph" src="/images/phDrk.png" alt="pH">
+        </paper-icon-button>
+          <paper-badge for="ph" label="7.6">
+          </paper-badge>
+
+    <paper-icon-button id="salinity" src="/images/salDrk.png" alt="Salinity">
+        </paper-icon-button>
+          <paper-badge for="salinity" label="1.023">
+          </paper-badge>
+
+    </div>
+
+    </div>
+    <!--<p>Target Temperature = </p>
+    <p
+        id="temperature"
+        class$="[[emptyClass(temperature, editable)]]"
+        contenteditable$="[[editable]]"></p>-->
+
   </template>
   <script>
     Polymer({
@@ -84,6 +137,12 @@
           value: ''
         },
 
+        temperature: {
+          type: String,
+          notify: true,
+          value: ''
+        },
+
         lastUpdated: {
           type: Number,
           value: 0
@@ -95,7 +154,7 @@
       },
 
       observers: [
-        'updateTextContent(title, body)'
+        'updateTextContent(title, body, temperature)'
       ],
 
       emptyClass(content, editable) {
@@ -115,16 +174,18 @@
         return true;
       },
 
-      updateTextContent(title, body) {
+      updateTextContent(title, body, temperature) {
         console.log(arguments);
         this.$.title.textContent = title;
         this.$.body.textContent = body;
+        this.$.temperature.textContent = temperature;
       },
 
       onInput() {
         this.async(function() {
           this.title = this.$.title.innerText;
           this.body = this.$.body.innerText;
+          this.temperature = this.$.temperature.innerText;
         });
       }
     })

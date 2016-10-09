@@ -1,9 +1,23 @@
 [debug] ----------------------------------------------------------------------
-[debug] Command:      /usr/local/bin/node /usr/local/bin/firebase serve
+[debug] Command:      /usr/local/bin/node /usr/local/bin/firebase --debug serve
 [debug] CLI Version:  3.0.8
 [debug] Platform:     darwin
 [debug] Node Version: v4.4.5
-[debug] Time:         Fri Oct 07 2016 21:06:47 GMT-0700 (PDT)
+[debug] Time:         Sat Oct 08 2016 07:22:59 GMT-0700 (PDT)
+[debug] ----------------------------------------------------------------------
+[debug] 
+[info] Starting Firebase development server...
+[info] 
+[info] Project Directory: /Users/dbrown/dev/blacktipFE
+[info] Public Directory: public
+[info] 
+[info] Server listening at: http://localhost:5000
+[debug] ----------------------------------------------------------------------
+[debug] Command:      /usr/local/bin/node /usr/local/bin/firebase --debug serve
+[debug] CLI Version:  3.0.8
+[debug] Platform:     darwin
+[debug] Node Version: v4.4.5
+[debug] Time:         Sat Oct 08 2016 07:46:31 GMT-0700 (PDT)
 [debug] ----------------------------------------------------------------------
 [debug] 
 [info] Starting Firebase development server...

@@ -66,7 +66,8 @@
       save() {
         if (this.$.document.isNew &&
             (this.editableTank.title ||
-             this.editableTank.body)) {
+             this.editableTank.body ||
+             this.editableTank.temperature)) {
           return this.$.document.save(this.tanksPath).then(() => {
             this.$.document.reset();
           });

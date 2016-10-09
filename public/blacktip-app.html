@@ -2,6 +2,7 @@
 <link rel="import" href="elements/blacktip-elements.html">
 <link rel="import" href="bower_components/app-storage/app-indexeddb-mirror/app-indexeddb-mirror.html">
 <link rel="import" href="bower_components/polymerfire/polymerfire.html">
+<link rel="stylesheet" type="text/css" href="styles/inline.css">
 
 <dom-module id="blacktip-app">
   <template>
@@ -58,9 +59,19 @@
         id$="[[tank.$key]]"
         title="[[tank.title]]"
         body="[[tank.body]]"
+        temperature="[[tank.temperature]]"
         on-tap="edit">
       </blacktip-tank>
+      <!--<div class="tank-key" hidden></div>
+      <div class="card-last-updated" hidden></div>-->
       </template>
+    </div>
+    <div class="visual">
+          <div class="icon"></div>
+          <div class="temperature">
+            <span>Current Outside Temp = 50</span><span class="value"></span><span class="scale">°F</span><br>
+            <span>Current Room Temp = 77</span><span class="value"></span><span class="scale">°F</span>
+          </div>
     </div>
   </template>
   <script>
