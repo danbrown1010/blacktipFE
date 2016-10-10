@@ -2,7 +2,11 @@
 <link rel="import" href="/bower_components/paper-styles/typography.html">
 <link rel="import" href="/bower_components/paper-icon-buttons/paper-icon-button.html">
 <link rel="import" href="/bower_components/paper-badge/paper-badge.html">
+<link rel="import" href="/bower_components/paper-card/paper-card.html">
+<link rel="import" href="/bower_components/paper-input/paper-input.html">
 <link rel="import" href="/bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="/bower_components/iron-icons/hardware-icons.html">
+<link rel="import" href="/bower_components/iron-collapse/iron-collapse.html">
 
 
 <dom-module id="blacktip-tank">
@@ -58,55 +62,83 @@
 
       .container {
         display: inline-block;
-        margin-left: 30px;
-        margin-right: 30px;
+        margin-left: 0px;
+        margin-right: 0px;
+      }
+
+      .footer {
+        font-size: .50em;
+        margin-left: 0px;
+        margin-right: 0px;
       }
 
       .container > paper-badge {
-       --paper-badge-margin-left: -15px;
-       --paper-badge-width: 30px;
-       --paper-badge-margin-bottom: -10px;
+       --paper-badge-margin-left: -50px;
+       --paper-badge-width: 45px;
+       --paper-badge-height: 30px;
+       --paper-badge-margin-bottom: -25px;
        --paper-badge-background: var(--paper-indigo-500);
 
       }
+
+      paper-icon-button {
+       width: 75px; /*yoursizehere*/
+       height: 75px; /*yoursizehere*/
+      }
+
+      paper-input {
+       font-size: 1.15em;
+       margin: 0;
+       white-space: pre-wrap;
+       }
     </style>
     <!--<div class="tank-key" hidden></div>
     <div class="card-last-updated" hidden></div>
     <div class="temperature">
             <span class="value"></span><span class="scale">°F</span>
     </div>-->
-    <h1
+    <!--h1
         id="title"
         class$="[[emptyClass(title, editable)]]"
-        contenteditable$="[[editable]]"></h1>
+        contenteditable$="[[editable]]"></h1-->
+    <div>
+    <paper-input label="Tank Name" id="title"
+        class$="[[emptyClass(title, editable)]]"
+        contenteditable$="[[editable]]"></paper-input><br>
+
     <span
         id="body"
         class$="[[emptyClass(body, editable)]]"
         contenteditable$="[[editable]]"></span><br>
 
     
-    <span>Target Temp = </span><span id="temperature"
+    <span style="visibility:hidden">Target Temp = </span><span style="visibility:hidden" id="temperature"
         class$="[[emptyClass(temperature, editable)]]"
         contenteditable$="[[editable]]"></span><br><br><br>
+    </div>
     <div class="container">
-    <paper-icon-button id="temp" src="/images/tempDrk.png" alt="temperature">
+    <paper-icon-button id="temp" alt="Temperature" src="/images/tempDrk.png" alt="temperature">
         </paper-icon-button>
-          <paper-badge for="temp" label$="[[temperature]]">
+          <paper-badge for="temp" label$="[[temperature]] °F">
         </paper-badge>
 
-    <paper-icon-button id="ph" src="/images/phDrk.png" alt="pH">
+    <paper-icon-button id="ph" alt="pH" src="/images/phDrk.png" alt="pH">
         </paper-icon-button>
           <paper-badge for="ph" label="7.6">
           </paper-badge>
 
-    <paper-icon-button id="salinity" src="/images/salDrk.png" alt="Salinity">
+    <paper-icon-button id="salinity" alt="Salinity" src="/images/salDrk.png" alt="Salinity">
         </paper-icon-button>
           <paper-badge for="salinity" label="1.023">
           </paper-badge>
 
-    </div>
-
-    </div>
+    <paper-icon-button id="topoff" alt="Top Off" src="/images/topoffDrk.png" alt="Top Off">
+        </paper-icon-button>
+          <paper-badge for="topoff" label="97%">
+          </paper-badge>
+    
+    <div class="footer">[[id]]</div>
+    
     <!--<p>Target Temperature = </p>
     <p
         id="temperature"

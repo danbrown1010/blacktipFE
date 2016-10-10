@@ -58,6 +58,14 @@ body {
           align-content: stretch;
   background: #ececec; }
 
+.outside{
+  font-size: 10px;
+}
+
+.room{
+  font-size: 10px;
+}
+
 .header {
   width: 100%;
   height: 56px;

@@ -52,25 +52,43 @@
        data="{{tanks}}"
        persisted-data="{{persistedTanks}}">
     </app-indexeddb-mirror>
-
+    <firebase-query
+       id="query2"
+       app-name="blacktip"
+       path="/measurements/[[user.uid]]"
+       data="{{measurements}}">
+    </firebase-query>
+    <app-indexeddb-mirror
+       session="[[user.uid]]"
+       key="measurements"
+       data="{{measurements}}"
+       persisted-data="{{persistedMeasurements}}">
+    </app-indexeddb-mirror>
+    
+    <!-- Iterate through the tanks and show all measurements for each tank -->
     <div class="tanks">
       <template is="dom-repeat" items="[[persistedTanks]]" as="tank">
-      <blacktip-tank
-        id$="[[tank.$key]]"
-        title="[[tank.title]]"
-        body="[[tank.body]]"
-        temperature="[[tank.temperature]]"
-        on-tap="edit">
-      </blacktip-tank>
-      <!--<div class="tank-key" hidden></div>
-      <div class="card-last-updated" hidden></div>-->
-      </template>
+      <template is="dom-repeat" items="[[persistedMeasurements]]" as="measurement">
+        <blacktip-tank
+           id$="[[tank.$key]]"
+           title="[[tank.title]]"
+           body="[[tank.body]]"
+           temperature="[[measurement.currentTemp]]"
+           on-tap="edit">
+        </blacktip-tank>
+      </template> <!-- Measurements -->
+      </template> <!-- Tanks -->
     </div>
-    <div class="visual">
+    <!-- Iterate through the tanks and show all measurements for each tank -->
+    
+
+    <div class="environment">
           <div class="icon"></div>
-          <div class="temperature">
-            <span>Current Outside Temp = 50</span><span class="value"></span><span class="scale">°F</span><br>
+          <div class="room">
             <span>Current Room Temp = 77</span><span class="value"></span><span class="scale">°F</span>
+          <div>
+          <div class="outside">
+            <span>Current Outside Temp = 50</span><span class="value"></span><span class="scale">°F</span><br>
           </div>
     </div>
   </template>
