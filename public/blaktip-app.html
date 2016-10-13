@@ -1,0 +1,118 @@
+<link rel="import" href="elements/blaktip-elements.html">
+<link rel="import" href="bower_components/app-storage/app-indexeddb-mirror/app-indexeddb-mirror.html">
+<link rel="import" href="bower_components/polymerfire/polymerfire.html">
+
+
+<dom-module id="blaktip-app">
+  <template>
+    <style include="blaktip-app-shared-styles"></style>
+    <blaktip-toolbar
+       signed-in="[[signedIn]]"
+       on-sign-out="signOut">
+    </blaktip-toolbar>
+    <blaktip-login
+       on-sign-in="signIn"
+       signed-in="[[signedIn]]"
+       disabled="[[!online]]">
+    </blaktip-login>
+    <paper-fab
+       icon="add"
+       on-tap="create"
+       disabled="[[!online]]"
+       aria-label="Add tank">
+    </paper-fab>
+    <blaktip-editor
+       id="editor"
+       tank="{{editableTank}}"
+       on-close="commitChange">
+    </blaktip-editor>
+    <firebase-document
+       id="document"
+       app-name="blaktip"
+       path="[[editableTankId]]"
+       data="{{editableTank}}">
+    </firebase-document>
+    <firebase-auth
+       id="auth"
+       app-name="blaktip"
+       provider="google"
+       signed-in="{{signedIn}}"
+       user="{{user}}">
+    </firebase-auth>
+    <firebase-query
+       id="query"
+       app-name="blaktip"
+       path="/tanks/[[user.uid]]"
+       data="{{tanks}}">
+    </firebase-query>
+    <app-indexeddb-mirror
+       session="[[user.uid]]"
+       key="tanks"
+       data="{{tanks}}"
+       persisted-data="{{persistedTanks}}">
+    </app-indexeddb-mirror>
+    <firebase-query
+       id="query2"
+       app-name="blaktip"
+       path="/measurements/[[user.uid]]"
+       data="{{measurements}}">
+    </firebase-query>
+    <app-indexeddb-mirror
+       session="[[user.uid]]"
+       key="measurements"
+       data="{{measurements}}"
+       persisted-data="{{persistedMeasurements}}">
+    </app-indexeddb-mirror>
+
+
+    <blaktip-paper-tabs selected="1" scrollable>
+      <paper-tab>Rooms</paper-tab>
+      <paper-tab>Tanks</paper-tab>
+      <paper-tab>Logs</paper-tab>
+      <paper-tab>Livestock</paper-tab>
+      <paper-tab>Analytics</paper-tab>
+      <paper-tab>Community</paper-tab>
+      <div class="page">Rooms will be here!</div>
+      <div class="page tanks">
+        <template is="dom-repeat" items="[[persistedTanks]]" as="tank">
+        <template is="dom-repeat" items="[[persistedMeasurements]]" as="measurement">
+          <blaktip-tank
+           id$="[[tank.$key]]"
+           title="[[tank.title]]"
+           body="[[tank.body]]"
+           temperature="[[measurement.currentTemp]]"
+           on-tap="edit">
+          </blaktip-tank>
+        </template>
+        </template>
+      </div>
+      <div class="page">Logs Here</div>
+      <div class="page">Livestock Here</div>
+      <div class="page">Analytics Here</div>
+      <div class="page">Community Here</div>
+    </blaktip-paper-tabs>
+  </template>
+  <script>
+    Polymer({
+      is: 'blaktip-app',
+
+      behaviors: [Polymer.BlaktipAppBehavior],
+
+      signIn: function() {
+         this.$.auth.signInWithPopup();
+      },
+
+      get tanksPath() {
+         return '/tanks/' + this.user.uid;
+      },
+
+      toEditableId: function(tankId) {
+         return this.tanksPath + '/' + tankId;
+      },
+
+      get isEditable() {
+         return this.online;
+      }
+    });
+  </script>
+</dom-module>

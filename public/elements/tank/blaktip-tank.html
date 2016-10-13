@@ -1,0 +1,241 @@
+<link rel="import" href="/bower_components/paper-styles/shadow.html">
+<link rel="import" href="/bower_components/paper-styles/typography.html">
+<link rel="import" href="/bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="/bower_components/paper-badge/paper-badge.html">
+<link rel="import" href="/bower_components/paper-card/paper-card.html">
+<link rel="import" href="/bower_components/paper-input/paper-input.html">
+<link rel="import" href="/bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="/bower_components/iron-icons/hardware-icons.html">
+<link rel="import" href="/bower_components/iron-collapse/iron-collapse.html">
+<link rel="import" href="/elements/common/blaktip-icons.html">
+<link rel="import" href="/elements/measurements/blaktip-measurements.html">
+
+
+
+<dom-module id="blaktip-tank">
+  <template>
+    <style is="custom-style">
+    .tank-header { @apply(--paper-font-headline); }
+    .tank-light { color: var(--paper-grey-600); }
+    .tank-location {
+     float: right;
+    font-size: 15px;
+    vertical-align: middle;
+    }
+    .cafe-reserve { color: var(--google-blue-500); }
+    iron-icon.star {
+    --iron-icon-width: 16px;
+    --iron-icon-height: 16px;
+    color: var(--paper-amber-500);
+    }
+    
+    iron-icon.star:last-of-type { 
+      color: var(--paper-grey-500); 
+    }
+
+    paper-badge {
+       --paper-badge-margin-left: -25px;
+       --paper-badge-margin-bottom: -15px;
+       --paper-badge-background: var(--paper-indigo-500);
+    }
+
+    paper-button {
+       padding: : 0 -5px 0 0;
+    }
+
+    td:hover {background-color: #f5f5f5}
+
+    </style>
+    <paper-card image="/images/reef3.png" alt="reef">
+      <div class="card-content">
+        <div class="tank-header" id="title">
+        </div>
+       <div class="tank-rating">
+         <iron-icon class="star" icon="star"></iron-icon>
+         <iron-icon class="star" icon="star"></iron-icon>
+         <iron-icon class="star" icon="star"></iron-icon>
+         <iron-icon class="star" icon="star"></iron-icon>
+         <iron-icon class="star" icon="star"></iron-icon>
+       </div>
+       <p id="body" class="tank-light"></p>
+       <p>Critical Measurements</p>
+       <table>
+       <tr>
+         <td><blaktip-temperature id="temperature" temperature="[[temperature]]"></blaktip-temperature></td>
+         <td><blaktip-ph id="ph" value="7.8"></blaktip-ph>  </td>
+         <td><blaktip-specgrav id="specgrav" value="1.023"></blaktip-specgrav>  </td>
+         <td><blaktip-alkalinity id="alkalinity" value="7"></blaktip-alkalinity></td>
+      </tr>
+      <tr>
+         <td><blaktip-calcium id="calcium" value="420"></blaktip-calcium>  </td>
+         <td><blaktip-magnesium id="magnesium" value="1280"></blaktip-magnesium>  </td>
+         <td><blaktip-phosphate id="phosphate" value=".005"></blaktip-phosohate>  </td>
+         <td><blaktip-ammonia id="ammonia" value="00.0"></blaktip-ammonia>  </td>
+       </tr>        
+       </table>
+       
+      </div>
+      <!--div class="card-actions">
+      <p>Critical Measurements</p>  
+      <div class="horizontal justified">
+        <paper-button label$="[[temperature]]" id="temperature" ></paper-button>  
+        <blacktip-temperature id="temperature"></blacktip-temperature>
+        <paper-button id="pH">7.4</paper-button>
+        <paper-button id="specGravity">1.023</paper-button>
+        <paper-button id="alkalinity">2.5 meq/L</paper-button>
+        <paper-button id="calcium">420 ppm</paper-button>
+        <paper-button id="magnesium">1280 ppm</paper-button>
+        <paper-button id="phosphate">0.005 ppm</paper-button>
+        <paper-button id="ammonia">00.0 ppm</paper-button>
+      </div>
+      </div>
+      <div class="card-actions">
+      <p>Other Measurements</p>
+      <div class="horizontal justified">
+        <paper-button id="nitrate">0.1 ppm</paper-button>
+        <paper-button id="nitrite">.00001 ppm</paper-button>
+        <paper-button id="silica">1.5 ppm</paper-button>
+        <paper-button id="boron">4.4ppm</paper-button>
+        <paper-button id="iodine">.06 ppm</paper-button>
+        <paper-button id="strontium">8 ppm</paper-button>
+        <paper-button id="orp">000</paper-button>
+        <paper-button id="iron">.0000006 ppm</paper-button>
+        <paper-button id="evaporation">2%</paper-button>
+      </div>
+      </div-->
+    </paper-card>
+ 
+
+
+
+
+    <!--<div class="tank-key" hidden></div>
+    <div class="card-last-updated" hidden></div>
+    <div class="temperature">
+            <span class="value"></span><span class="scale">°F</span>
+    </div>-->
+    <!--div>
+    <paper-input label="Tank Name" id="title"
+        class$="[[emptyClass(title, editable)]]"
+        contenteditable$="[[editable]]"></paper-input><br>
+
+    <span
+        id="body"
+        class$="[[emptyClass(body, editable)]]"
+        contenteditable$="[[editable]]"></span><br>
+
+    
+    <span style="visibility:hidden">Target Temp = </span><span style="visibility:hidden" id="temperature"
+        class$="[[emptyClass(temperature, editable)]]"
+        contenteditable$="[[editable]]"></span><br><br><br>
+    </div>
+    <div class="container">
+    <paper-icon-button id="temp" alt="Temperature" src="/images/tempDrk.png" alt="temperature">
+        </paper-icon-button>
+          <paper-badge for="temp" label$="[[temperature]] °F">
+        </paper-badge>
+
+    <paper-icon-button id="ph" alt="pH" src="/images/phDrk.png" alt="pH">
+        </paper-icon-button>
+          <paper-badge for="ph" label="7.6">
+          </paper-badge>
+
+    <paper-icon-button id="salinity" alt="Salinity" src="/images/salDrk.png" alt="Salinity">
+        </paper-icon-button>
+          <paper-badge for="salinity" label="1.023">
+          </paper-badge>
+
+
+    <paper-icon-button id="topoff" alt="Top Off" alt="Top Off">97%</paper-icon-button-->
+    <!--paper-input id="topoff" label="total">
+          <div prefix>%</div>
+    </paper-input>
+          <paper-badge for="topoff" icon="icons:settings">
+          </paper-badge>
+    
+    <div class="footer">[[id]]</div>
+    
+    <<p>Target Temperature = </p>
+    <p
+        id="temperature"
+        class$="[[emptyClass(temperature, editable)]]"
+        contenteditable$="[[editable]]"></p>-->
+
+  </template>
+  <script>
+    Polymer({
+      is: 'blaktip-tank',
+
+      properties: {
+        editable: {
+          type: Boolean,
+          reflectToAttribute: true,
+          value: false
+        },
+
+        title: {
+          type: String,
+          notify: true,
+          value: ''
+        },
+
+        body: {
+          type: String,
+          notify: true,
+          value: ''
+        },
+
+        temperature: {
+          type: String,
+          notify: true,
+          value: ''
+        },
+
+        lastUpdated: {
+          type: Number,
+          value: 0
+        }
+      },
+
+      listeners: {
+        input: 'onInput'
+      },
+
+      observers: [
+        'updateTextContent(title, body, temperature)'
+      ],
+
+      emptyClass(content, editable) {
+        if (editable) {
+          return !content ? 'placeholder' : '';
+        } else {
+          return !content ? 'hidden' : '';
+        }
+      },
+
+      propertiesAreEmpty() {
+        for (var i = 0; i < arguments.length; ++i) {
+          if (arguments[i]) {
+            return false;
+          }
+        }
+        return true;
+      },
+
+      updateTextContent(title, body, temperature) {
+        console.log(arguments);
+        this.$.title.textContent = title;
+        this.$.body.textContent = body;
+        //this.$.temperature.textContent = temperature;
+      },
+
+      onInput() {
+        this.async(function() {
+          this.title = this.$.title.innerText;
+          this.body = this.$.body.innerText;
+          this.temperature = this.$.temperature.innerText;
+        });
+      }
+    })
+  </script>
+</dom-module>

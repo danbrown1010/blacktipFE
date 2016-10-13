@@ -1,13 +1,13 @@
 <!--
 @license
-Copyright (c) 2016 Blacktip Author - Dan Brown. All rights reserved.
+Copyright (c) 2016 Blaktip Author - Dan Brown. All rights reserved.
 -->
 <link rel="import" href="/bower_components/paper-styles/color.html">
 <link rel="import" href="/bower_components/font-roboto/roboto.html">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,700">
 <link rel="import" href="/bower_components/iron-flex-layout/iron-flex-layout.html">
 
-<dom-module id="blacktip-app-shared-styles">
+<dom-module id="blaktip-app-shared-styles">
   <template>
     <style>
       :host {
@@ -28,7 +28,7 @@ Copyright (c) 2016 Blacktip Author - Dan Brown. All rights reserved.
         overflow: auto;
       }
 
-      blacktip-tank {
+      blaktip-tank {
         margin-bottom: 1em;
       }
 
@@ -50,7 +50,11 @@ Copyright (c) 2016 Blacktip Author - Dan Brown. All rights reserved.
           justify-content: center;
           align-content: space-around;
         }
-      }
+
+        blaktip-paper-tabs {
+         --tabs-background-colour: var(--paper-grey-700);
+         --tabs-colour: white;
+        }
     </style>
   </template>
 </dom-module>

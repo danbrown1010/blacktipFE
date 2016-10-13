@@ -9,6 +9,10 @@
     "paper-input": "PolymerElements/paper-input#^1.1.20",
     "paper-card": "PolymerElements/paper-card#^1.1.4",
     "iron-collapse": "PolymerElements/iron-collapse#^1.2.1",
-    "paper-drawer-panel": "PolymerElements/paper-drawer-panel#^1.0.10"
+    "paper-drawer-panel": "PolymerElements/paper-drawer-panel#^1.0.10",
+    "paper-toolbar": "PolymerElements/paper-toolbar#^1.1.7",
+    "paper-tabs": "PolymerElements/paper-tabs#^1.6.2",
+    "iron-pages": "PolymerElements/iron-pages#^1.0.8",
+    "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^1.2.5"
   }
 }
