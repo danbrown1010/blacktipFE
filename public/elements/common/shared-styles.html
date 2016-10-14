@@ -28,32 +28,61 @@ Copyright (c) 2016 Blaktip Author - Dan Brown. All rights reserved.
         overflow: auto;
       }
 
-      blaktip-tank {
-        margin-bottom: 1em;
-      }
-
-      paper-fab {
-        position: absolute;
-        bottom: 1em;
-        right: 1em;
-      }
-
-      @media (min-width: 640px) {
-        na-note {
-          max-width: 320px;
-          margin: 0 0.5em 1em;
-        }
-
-        .tanks {
+       .tanks {
           @apply(--layout-horizontal);
           @apply(--layout-wrap);
           justify-content: center;
           align-content: space-around;
         }
 
-        blaktip-paper-tabs {
+
+        .rooms {
+        position: relative;
+        box-sizing: border-box;
+        padding: 1em;
+        max-height: calc(100vh - 46px);
+        overflow: auto;
+      }
+
+       .rooms {
+          @apply(--layout-horizontal);
+          @apply(--layout-wrap);
+          justify-content: center;
+          align-content: space-around;
+        }
+
+      blaktip-tank {
+        margin-bottom: 1em;
+        position: relative;
+        z-index: 0;
+      }
+
+      paper-fab {
+        position: absolute;
+        bottom: 1em;
+        right: 1em;
+        z-index: 800;
+      }
+
+ @media (min-width: 640px) {
+        na-note {
+          max-width: 320px;
+          margin: 0 0.5em 1em;
+        }
+
+
+      blaktip-toolbar {
+        position: relative;
+        z-index: 9999;
+      }
+
+     
+      
+      blaktip-paper-tabs {
          --tabs-background-colour: var(--paper-grey-700);
          --tabs-colour: white;
+         /*position: relative;
+         z-index: 500;*/
         }
     </style>
   </template>

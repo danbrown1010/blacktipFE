@@ -39,6 +39,8 @@
        signed-in="{{signedIn}}"
        user="{{user}}">
     </firebase-auth>
+    
+    <!--Tanks Query -->
     <firebase-query
        id="query"
        app-name="blaktip"
@@ -51,6 +53,8 @@
        data="{{tanks}}"
        persisted-data="{{persistedTanks}}">
     </app-indexeddb-mirror>
+    
+    <!--Measurements Query -->
     <firebase-query
        id="query2"
        app-name="blaktip"
@@ -63,16 +67,47 @@
        data="{{measurements}}"
        persisted-data="{{persistedMeasurements}}">
     </app-indexeddb-mirror>
+    
+   <!--Rooms Query -->
+   <firebase-document
+       id="document2"
+       app-name="blaktip"
+       path="[[editableRoomsId]]"
+       data="{{editableRoom}}">
+    </firebase-document>
+    <firebase-query
+       id="query3"
+       app-name="blaktip"
+       path="/rooms/[[user.uid]]"
+       data="{{rooms}}">
+    </firebase-query>
+    <app-indexeddb-mirror
+       session="[[user.uid]]"
+       key="rooms"
+       data="{{rooms}}"
+       persisted-data="{{persistedRooms}}">
+    </app-indexeddb-mirror>
 
 
-    <blaktip-paper-tabs selected="1" scrollable>
+    <blaktip-paper-tabs selected="0" scrollable>
       <paper-tab>Rooms</paper-tab>
       <paper-tab>Tanks</paper-tab>
       <paper-tab>Logs</paper-tab>
       <paper-tab>Livestock</paper-tab>
       <paper-tab>Analytics</paper-tab>
       <paper-tab>Community</paper-tab>
-      <div class="page">Rooms will be here!</div>
+      <div class="page rooms">
+        <template is="dom-repeat" items="[[persistedRooms]]" as="room">
+        <blaktip-room
+           id$="[[room.$key]]"
+           name="[[room.name]]"
+           temperature="[[room.temperature]]"
+           humidity="[[room.humidity]]"
+           feed="[[room.feed]]"
+           on-tap="edit">
+        </blaktip-room>
+        </template>
+      </div>
       <div class="page tanks">
         <template is="dom-repeat" items="[[persistedTanks]]" as="tank">
         <template is="dom-repeat" items="[[persistedMeasurements]]" as="measurement">
@@ -91,6 +126,8 @@
       <div class="page">Analytics Here</div>
       <div class="page">Community Here</div>
     </blaktip-paper-tabs>
+
+
   </template>
   <script>
     Polymer({
@@ -106,8 +143,16 @@
          return '/tanks/' + this.user.uid;
       },
 
+      get roomsPath() {
+         return '/rooms/' + this.user.uid;
+      },
+
       toEditableId: function(tankId) {
          return this.tanksPath + '/' + tankId;
+      },
+
+      toEditableId: function(roomId) {
+         return this.roomsPath + '/' + roomId;
       },
 
       get isEditable() {

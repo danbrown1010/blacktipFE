@@ -8,10 +8,19 @@
         editableTankId: {
           type: String,
           notify: true
+        },
+
+        editableRoomId: {
+          type: String,
+          notify: true
         }
       },
 
       get tanksPath() {
+        return '';
+      },
+
+      get roomsPath() {
         return '';
       },
 

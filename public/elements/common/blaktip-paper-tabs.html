@@ -43,7 +43,7 @@ set the background and foreground colours of the tabs like this:
         display: block;
       }
       paper-tabs {
-        background-color: var(--tabs-background-colour, mediumslateblue);
+        background-color: var(--tabs-background-colour, --paper-grey-700);
         --paper-tabs-selection-bar-color: var(--tabs-colour, white);
         color: var(--tabs-colour, white);
       }
@@ -56,6 +56,7 @@ set the background and foreground colours of the tabs like this:
     <iron-pages selected="{{selected}}">
       <content selected=".page"></content>
     </iron-pages>
+
     
   </template>
 

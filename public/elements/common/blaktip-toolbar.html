@@ -69,14 +69,26 @@ Copyright (c) 2016 Blaktip Author - Dan Brown. All rights reserved.
        --paper-badge-background: var(--paper-red-700);
 
       }
-      }
+     
+     .settingsMenu {
+      
+     }
+     .settingsMenuDrawer {
+      position: absolute;
+      z-index: 11000;
+     }
+      
     </style>
     <!--iron-icon icon="icons:opacity" paper-drawer-toggle raised></iron-icon-->
-    <paper-icon-button icon="icons:menu" paper-drawer-toggle raised></paper-icon-button>
+    <paper-icon-button class="settingsMenu" icon="icons:menu" paper-drawer-toggle raised></paper-icon-button>
+    <paper-drawer-panel class="settingsMenuDrawer" id="paperDrawerPanel" force-narrow>
+      <div drawer>
+        <button tabindex="0">Options</button>
+        <button tabindex="0">Settings</button>
+        <button tabindex="0" paper-drawer-toggle>Close drawer</button>
+      </div>
+    </paper-drawer-panel>
     <h1>Blaktip</h1>
-
-    
-
     <iron-icon icon="cloud" hidden$="[[!online]]"></iron-icon>
     <iron-icon icon="cloud-off" hidden$="[[online]]"></iron-icon>
     <iron-icon icon="help" ></iron-icon>
@@ -90,13 +102,7 @@ Copyright (c) 2016 Blaktip Author - Dan Brown. All rights reserved.
         on-tap="lock">
     </paper-icon-button>
     
-    <paper-drawer-panel id="paperDrawerPanel" force-narrow>
-      <div drawer>
-        <button tabindex="0">Options</button>
-        <button tabindex="0">Settings</button>
-        <button tabindex="0" paper-drawer-toggle>Close drawer</button>
-      </div>
-    </paper-drawer-panel>
+    
 
     <script>
       (function(global) {
